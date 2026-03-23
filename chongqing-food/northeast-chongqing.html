@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>渝东北片区美食 - 寻味山城</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <a href="index.html" class="logo"><div class="logo-icon"><i class="fas fa-pepper-hot"></i></div><span>寻味山城</span></a>
+                <button class="mobile-menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+                <nav id="mainNav">
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="main-city.html">主城都市区</a></li>
+                        <li><a href="west-chongqing.html">渝西片区</a></li>
+                        <li><a href="northeast-chongqing.html" class="active">渝东北片区</a></li>
+                        <li><a href="southeast-chongqing.html">渝东南片区</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <div class="container">
+                <h1>渝东北三峡库区美食</h1>
+                <p>万州、开州、云阳、奉节、巫山、忠县、丰都、涪陵、梁平、城口、巫溪</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <section class="section">
+                <div class="grid grid-3">
+                    <div class="card food-card" onclick="window.location.href='wanzhou-fish.html'">
+                        <div class="card-image">
+                            <img src="https://ts1.tc.mm.bing.net/th/id/R-C.e14bbfdc2e6b3cdbbab2241ed4bc71fd?rik=46dw0zUQX5opTA&riu=http%3a%2f%2fn.sinaimg.cn%2fsinacn10121%2f64%2fw1024h640%2f20191223%2f6bea-ikyziqx9901359.jpg&ehk=hEaqp7VmI%2fvI3sacB38kg6rSRawI3SQQUaP%2bBJwrgqQ%3d&risl=&pid=ImgRaw&r=0" alt="万州烤鱼">
+                            <span class="card-badge">招牌</span>
+                        </div>
+                        <div class="card-content">
+                            <h3>万州烤鱼</h3>
+                            <p class="description">万州区名片美食，融合腌烤炖三艺，外皮香脆，肉质鲜嫩</p>
+                            <div class="tags"><span class="tag">万州区</span><span class="tag">鱼类</span></div>
+                        </div>
+                    </div>
+                    <div class="card food-card" onclick="window.location.href='fengjie-qicheng.html'">
+                        <div class="card-image">
+                            <img src="https://www.3-v.net/UploadFiles/201908/2019080949219305.jpg" alt="奉节脐橙">
+                        </div>
+                        <div class="card-content">
+                            <h3>奉节脐橙</h3>
+                            <p class="description">奉节县特产，中国地理标志产品，汁多味甜</p>
+                            <div class="tags"><span class="tag">奉节县</span><span class="tag">水果</span></div>
+                        </div>
+                    </div>
+                    <div class="card food-card" onclick="window.location.href='zhongzhou-doufurong.html'">
+                        <div class="card-image">
+                            <img src="https://ts4.tc.mm.bing.net/th/id/OIP-C.n8-Hyp85p2qGfaZ8ISZ9uAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="忠州豆腐乳">
+                        </div>
+                        <div class="card-content">
+                            <h3>忠州豆腐乳</h3>
+                            <p class="description">忠县传统名菜，口感细腻，回味悠长，佐餐佳品</p>
+                            <div class="tags"><span class="tag">忠县</span><span class="tag">豆腐</span></div>
+                        </div>
+                    </div>
+                    <div class="card food-card" onclick="window.location.href='fuling-zhacai.html'">
+                        <div class="card-image">
+                            <img src="https://ts1.tc.mm.bing.net/th/id/R-C.057cf1aaefdcc3c041c9ef47530ae300?rik=CnUQ4IaDKt75ag&riu=http%3a%2f%2fzhizhuyule.com%2fwp-content%2fuploads%2f2022%2f01%2f1-24.jpg&ehk=H5CLeeFlKsHy7073VHBdlAxrKnBjYChmSQTN7zPQCYE%3d&risl=&pid=ImgRaw&r=0" alt="涪陵榨菜">
+                        </div>
+                        <div class="card-content">
+                            <h3>涪陵榨菜</h3>
+                            <p class="description">涪陵区特产，中国三大名菜之一，脆嫩爽口</p>
+                            <div class="tags"><span class="tag">涪陵区</span><span class="tag">酱菜</span></div>
+                        </div>
+                    </div>
+                    <div class="card food-card" onclick="window.location.href='liangping-zhangyazi.html'">
+                        <div class="card-image">
+                            <img src="https://ts2.tc.mm.bing.net/th/id/OIP-C.KHZCiYj8zSkkgqYXsixS5AHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="梁平张鸭子">
+                        </div>
+                        <div class="card-content">
+                            <h3>梁平张鸭子</h3>
+                            <p class="description">梁平区传统名吃，卤香浓郁，肉质紧实</p>
+                            <div class="tags"><span class="tag">梁平区</span><span class="tag">卤味</span></div>
+                        </div>
+                    </div>
+                    <div class="card food-card" onclick="window.location.href='yunyang-baomian.html'">
+                        <div class="card-image">
+                            <img src="https://ts1.tc.mm.bing.net/th/id/OIP-C.FF05NeHWFv6y6EdBx1jAngAAAA?rs=1&pid=ImgDetMain&o=7&rm=3" alt="云阳包面">
+                        </div>
+                        <div class="card-content">
+                            <h3>云阳包面</h3>
+                            <p class="description">云阳县特色小吃，皮薄馅大，汤鲜味美</p>
+                            <div class="tags"><span class="tag">云阳县</span><span class="tag">面食</span></div>
+                        </div>
+                    </div>
+                    <div class="card food-card" onclick="window.location.href='kaizhoudouban.html'">
+                        <div class="card-image">
+                            <img src="https://ts4.tc.mm.bing.net/th/id/OIP-C.nQslPyIwJNLkdCx0px6s8wHaEz?rs=1&pid=ImgDetMain&o=7&rm=3" alt="开州香辣豆瓣">
+                        </div>
+                        <div class="card-content">
+                            <h3>开州香辣豆瓣</h3>
+                            <p class="description">开州区特产，麻辣鲜香，烹饪佳品</p>
+                            <div class="tags"><span class="tag">开州区</span><span class="tag">调味品</span></div>
+                        </div>
+                    </div>
+                    <div class="card food-card" onclick="window.location.href='fengduji.html'">
+                        <div class="card-image">
+                            <img src="https://img.alicdn.com/i4/18168021/O1CN01AFlW9n297fLnzlV8u_!!18168021.jpg" alt="丰都麻辣鸡">
+                        </div>
+                        <div class="card-content">
+                            <h3>丰都麻辣鸡</h3>
+                            <p class="description">丰都县特色，麻辣鲜香，鸡肉紧实</p>
+                            <div class="tags"><span class="tag">丰都县</span><span class="tag">禽类</span></div>
+                        </div>
+                    </div>
+                    <div class="card food-card" onclick="window.location.href='wushanliangfen.html'">
+                        <div class="card-image">
+                            <img src="https://pic.huitu.com/pic/20211211/2884697_20211211113646531070_0.jpg" alt="巫山翡翠凉粉">
+                        </div>
+                        <div class="card-content">
+                            <h3>巫山翡翠凉粉</h3>
+                            <p class="description">巫山县传统小吃，清凉爽口，翡翠色</p>
+                            <div class="tags"><span class="tag">巫山县</span><span class="tag">小吃</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo"><div class="logo-icon"><i class="fas fa-pepper-hot"></i></div><span>寻味山城</span></a>
+                    <p>致力于传播重庆美食文化</p>
+                </div>
+                <div class="footer-links">
+                    <h4>区域美食</h4>
+                    <ul>
+                        <li><a href="main-city.html">主城都市区</a></li>
+                        <li><a href="northeast-chongqing.html">渝东北片区</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 寻味山城. All rights reserved.</p></div>
+        </div>
+    </footer>
+    <script>function toggleMenu(){document.getElementById('mainNav').classList.toggle('active');}</script>
+
+<style>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.inland-security-footer {
+  position: fixed;
+  z-index: 10;
+  bottom: 0;
+  right: 0;
+  width: fit-content;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.tooltip-container {
+  position: relative;
+}
+
+.trigger-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background-color: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.minimax-link {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 300;
+  color: #adadad;
+  text-decoration: none;
+}
+
+.minimax-link:visited {
+  color: #adadad;
+}
+
+.minimax-link:hover {
+  color: #666666;
+}
+
+.tooltip-content {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  padding-bottom: 16px; /* 8px 内容间距 + 8px 用于鼠标移动的透明区域 */
+  font-size: 12px;
+  line-height: 17px;
+  background-color: #fafafa;
+  border-radius: 12px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  color: #171717;
+}
+
+/* 创建透明的连接区域，让鼠标可以平滑移动到 tooltip */
+.tooltip-content::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  right: 0;
+  height: 16px;
+}
+
+.tooltip-container:hover .tooltip-content {
+  display: flex;
+}
+
+.info-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.beian-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #171717;
+}
+
+.beian-icon {
+  width: 14px;
+  height: 14px;
+  margin-right: 2px;
+}
+
+.underline-text {
+  color: #171717;
+  text-decoration: underline;
+}
+
+.underline-text:hover {
+  color: #000000;
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+  .trigger-content {
+    background-color: transparent;
+  }
+
+  .minimax-link,
+  .minimax-link:visited {
+    color: #666666;
+  }
+
+  .minimax-link:hover {
+    color: #adadad;
+  }
+
+  .tooltip-content {
+    background-color: #262626;
+    color: #ededed;
+  }
+
+  .beian-link,
+  .underline-text {
+    color: #ededed;
+  }
+
+  .underline-text:hover {
+    color: #ffffff;
+  }
+}
+
+</style>
+<div class="inland-security-footer">
+  <div class="tooltip-container">
+    <div class="trigger-content">
+      <a href="https://www.minimaxi.com/" target="_blank" rel="noreferrer" class="minimax-link">
+        <span>© 2026 MiniMax</span>
+      </a>
+    </div>
+    <div class="tooltip-content">
+      <section class="info-section">
+        <span>上海稀宇科技有限公司</span>
+      </section>
+
+      <section class="info-section">
+        <a class="beian-link" href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31010402010179" target="_blank" rel="noreferrer">
+          <img alt="hailuo-beian-icon" src="https://cdn.hailuoai.com/hailuo-video-web/public_assets/223037d3-79fd-4db0-a456-749f38a6a14b.png" class="beian-icon">
+          <span class="underline-text">沪公网安备31010402010179号</span>
+        </a>
+        <a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer" class="underline-text">
+          沪ICP备2023003282号-38
+        </a>
+      </section>
+
+      <section class="info-section">
+        <span>模型名称：MiniMax</span>
+        <span>备案号：Shanghai-MiniMax-202505230046</span>
+      </section>
+
+      <section class="info-section">
+        <a href="https://agent.minimaxi.com/doc/zh/terms-of-service.html" target="_blank" rel="noreferrer" class="underline-text">
+          用户协议
+        </a>
+        <a href="https://agent.minimaxi.com/doc/zh/privacy-policy.html" target="_blank" rel="noreferrer" class="underline-text">
+          隐私政策
+        </a>
+      </section>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

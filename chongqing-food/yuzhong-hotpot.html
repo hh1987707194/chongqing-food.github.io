@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重庆老火锅 - 寻味山城</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/detail.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <a href="index.html" class="logo"><div class="logo-icon"><i class="fas fa-pepper-hot"></i></div><span>寻味山城</span></a>
+                <button class="mobile-menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+                <nav id="mainNav">
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="main-city.html">主城都市区</a></li>
+                        <li><a href="west-chongqing.html">渝西片区</a></li>
+                        <li><a href="northeast-chongqing.html">渝东北片区</a></li>
+                        <li><a href="southeast-chongqing.html">渝东南片区</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="detail-header">
+        <div class="bg-image"><img src="https://pic.nximg.cn/file/20190104/3709937_174455022000_2.jpg" alt="重庆火锅"></div>
+        <div class="overlay"></div>
+        <div class="detail-info">
+            <div class="container">
+                <h1 class="detail-title">重庆老火锅</h1>
+                <div class="detail-tags">
+                    <span class="tag">渝中区</span>
+                    <span class="tag">经典</span>
+                    <span class="tag">必吃</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <div class="container">
+            <div class="detail-content">
+                <div class="detail-main">
+                    <section class="content-section">
+                        <h2><i class="fas fa-book-open"></i> 简介</h2>
+                        <p class="intro-text">重庆老火锅是重庆最具代表性的美食，起源于川江流域。重庆火锅以其"麻、辣、鲜、香"的独特风味著称，已成为重庆的城市名片。火锅采用九宫格设计，不同格子代表不同温度和食材，是重庆人热情豪爽性格的体现。</p>
+                    </section>
+
+                    <section class="content-section">
+                        <h2><i class="fas fa-history"></i> 历史渊源</h2>
+                        <div class="history-timeline">
+                            <div class="timeline-item">
+                                <span class="year">明末清初</span>
+                                <p>重庆火锅起源于川江流域纤夫的粗放饮食，将江边捡来的内脏洗净后放入锅中煮食</p>
+                            </div>
+                            <div class="timeline-item">
+                                <span class="year">民国时期</span>
+                                <p>火锅从江边走向街巷，出现专门经营火锅的店铺，逐渐发展成今日规模</p>
+                            </div>
+                            <div class="timeline-item">
+                                <span class="year">1980年代</span>
+                                <p>重庆火锅开始走向全国，以其独特魅力征服全国食客的味蕾</p>
+                            </div>
+                            <div class="timeline-item">
+                                <span class="year">现代</span>
+                                <p>重庆火锅已成为中国餐饮文化的重要符号，遍布全球各地</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="content-section">
+                        <h2><i class="fas fa-carrot"></i> 特色食材</h2>
+                        <div class="ingredients-grid">
+                            <div class="ingredient-card">
+                                <h3>锅底原料</h3>
+                                <ul>
+                                    <li><strong>牛油：</strong>火锅底料的核心，选用优质牛油，香气浓郁</li>
+                                    <li><strong>辣椒：</strong>四川郫县豆瓣椒，辣而不燥</li>
+                                    <li><strong>花椒：</strong>四川汉源花椒，麻味纯正</li>
+                                    <li><strong>姜蒜：</strong>去腥增香的必备调料</li>
+                                </ul>
+                            </div>
+                            <div class="ingredient-card">
+                                <h3>经典配菜</h3>
+                                <ul>
+                                    <li><strong>毛肚：</strong>火锅必点，七上八下口感最佳</li>
+                                    <li><strong>鸭肠：</strong>爽脆可口，必点菜品</li>
+                                    <li><strong>牛肉：</strong>麻辣牛肉、肥牛卷等</li>
+                                    <li><strong>脑花：</strong>口感细腻，营养丰富</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="content-section">
+                        <h2><i class="fas fa-fire"></i> 食用方法</h2>
+                        <div class="cooking-steps">
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h3>点锅</h3>
+                                    <p>锅底分为红汤（麻辣）、鸳鸯（辣/不辣）、清汤（养生）三种</p>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h3>涮菜</h3>
+                                    <p>遵循"先荤后素"原则，毛肚鸭肠"七上八下"即可食用</p>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h3>蘸料</h3>
+                                    <p>油碟（蒜泥+香油）是经典搭配，可解辣增香</p>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <h3>收尾</h3>
+                                    <p>最后下素菜或面条，吸满汤汁的素菜是火锅的完美收尾</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="content-section">
+                        <h2><i class="fas fa-store"></i> 推荐店铺</h2>
+                        <div class="restaurant-list">
+                            <div class="restaurant-item">
+                                <div class="restaurant-icon"><i class="fas fa-utensils"></i></div>
+                                <div>
+                                    <h3>珮姐老火锅</h3>
+                                    <p>地址：渝中区解放碑民权路28号 | 人均：120元</p>
+                                </div>
+                            </div>
+                            <div class="restaurant-item">
+                                <div class="restaurant-icon"><i class="fas fa-utensils"></i></div>
+                                <div>
+                                    <h3>周师兄大刀腰片火锅</h3>
+                                    <p>地址：渝中区八一路158号 | 人均：110元</p>
+                                </div>
+                            </div>
+                            <div class="restaurant-item">
+                                <div class="restaurant-icon"><i class="fas fa-utensils"></i></div>
+                                <div>
+                                    <h3>渝大狮老火锅</h3>
+                                    <p>地址：南岸区南滨路22号 | 人均：100元</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <aside class="detail-sidebar">
+                    <div class="sidebar-card">
+                        <h3>快速信息</h3>
+                        <ul class="quick-info">
+                            <li><strong>发源地：</strong>渝中区</li>
+                            <li><strong>类型：</strong>火锅</li>
+                            <li><strong>口味：</strong>麻辣鲜香</li>
+                            <li><strong>人均：</strong>80-150元</li>
+                            <li><strong>难度：</strong>中等</li>
+                        </ul>
+                    </div>
+                    <div class="sidebar-card">
+                        <h3>相关美食</h3>
+                        <ul class="related-foods">
+                            <li><a href="geleshan-chicken.html">🍗 歌乐山辣子鸡</a></li>
+                            <li><a href="nanshan-chicken.html">🍗 南山泉水鸡</a></li>
+                            <li><a href="wanzhou-fish.html">🐟 万州烤鱼</a></li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo"><div class="logo-icon"><i class="fas fa-pepper-hot"></i></div><span>寻味山城</span></a>
+                    <p>致力于传播重庆美食文化</p>
+                </div>
+                <div class="footer-links">
+                    <h4>区域美食</h4>
+                    <ul>
+                        <li><a href="main-city.html">主城都市区</a></li>
+                        <li><a href="west-chongqing.html">渝西片区</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 寻味山城. All rights reserved.</p></div>
+        </div>
+    </footer>
+    <script>function toggleMenu(){document.getElementById('mainNav').classList.toggle('active');}</script>
+
+<style>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.inland-security-footer {
+  position: fixed;
+  z-index: 10;
+  bottom: 0;
+  right: 0;
+  width: fit-content;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.tooltip-container {
+  position: relative;
+}
+
+.trigger-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background-color: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.minimax-link {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 300;
+  color: #adadad;
+  text-decoration: none;
+}
+
+.minimax-link:visited {
+  color: #adadad;
+}
+
+.minimax-link:hover {
+  color: #666666;
+}
+
+.tooltip-content {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  padding-bottom: 16px; /* 8px 内容间距 + 8px 用于鼠标移动的透明区域 */
+  font-size: 12px;
+  line-height: 17px;
+  background-color: #fafafa;
+  border-radius: 12px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  color: #171717;
+}
+
+/* 创建透明的连接区域，让鼠标可以平滑移动到 tooltip */
+.tooltip-content::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  right: 0;
+  height: 16px;
+}
+
+.tooltip-container:hover .tooltip-content {
+  display: flex;
+}
+
+.info-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.beian-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #171717;
+}
+
+.beian-icon {
+  width: 14px;
+  height: 14px;
+  margin-right: 2px;
+}
+
+.underline-text {
+  color: #171717;
+  text-decoration: underline;
+}
+
+.underline-text:hover {
+  color: #000000;
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+  .trigger-content {
+    background-color: transparent;
+  }
+
+  .minimax-link,
+  .minimax-link:visited {
+    color: #666666;
+  }
+
+  .minimax-link:hover {
+    color: #adadad;
+  }
+
+  .tooltip-content {
+    background-color: #262626;
+    color: #ededed;
+  }
+
+  .beian-link,
+  .underline-text {
+    color: #ededed;
+  }
+
+  .underline-text:hover {
+    color: #ffffff;
+  }
+}
+
+</style>
+<div class="inland-security-footer">
+  <div class="tooltip-container">
+    <div class="trigger-content">
+      <a href="https://www.minimaxi.com/" target="_blank" rel="noreferrer" class="minimax-link">
+        <span>© 2026 MiniMax</span>
+      </a>
+    </div>
+    <div class="tooltip-content">
+      <section class="info-section">
+        <span>上海稀宇科技有限公司</span>
+      </section>
+
+      <section class="info-section">
+        <a class="beian-link" href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31010402010179" target="_blank" rel="noreferrer">
+          <img alt="hailuo-beian-icon" src="https://cdn.hailuoai.com/hailuo-video-web/public_assets/223037d3-79fd-4db0-a456-749f38a6a14b.png" class="beian-icon">
+          <span class="underline-text">沪公网安备31010402010179号</span>
+        </a>
+        <a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer" class="underline-text">
+          沪ICP备2023003282号-38
+        </a>
+      </section>
+
+      <section class="info-section">
+        <span>模型名称：MiniMax</span>
+        <span>备案号：Shanghai-MiniMax-202505230046</span>
+      </section>
+
+      <section class="info-section">
+        <a href="https://agent.minimaxi.com/doc/zh/terms-of-service.html" target="_blank" rel="noreferrer" class="underline-text">
+          用户协议
+        </a>
+        <a href="https://agent.minimaxi.com/doc/zh/privacy-policy.html" target="_blank" rel="noreferrer" class="underline-text">
+          隐私政策
+        </a>
+      </section>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

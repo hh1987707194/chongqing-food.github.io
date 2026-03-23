@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>寻味山城 - 重庆38区县美食大全</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 轮播样式 */
+        .hero {
+            position: relative;
+            height: 70vh;
+            min-height: 500px;
+            overflow: hidden;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            background-size: cover;
+            background-position: center;
+        }
+
+            .carousel-slide.active {
+                opacity: 1;
+            }
+
+        /* 轮播图片示例（你可以替换为自己的图片链接） */
+        .slide-1 {
+            background-image: url('https://ts1.tc.mm.bing.net/th/id/R-C.03363417ef7d3e204f9fa68727a00d2d?rik=s7D5hkdrUodtKw&riu=http%3a%2f%2f18895330.s21i.faiusr.com%2f2%2f1%2fABUIABACGAAgw9SYogYowo-z7QYw9Qk4zgY.jpg&ehk=mfD8nOM35PXgNZkp4EPsBp17WU7WrTrgMxXdOJ7zsTg%3d&risl=&pid=ImgRaw&r=0');
+        }
+
+        .slide-2 {
+            background-image: url('https://ts1.tc.mm.bing.net/th/id/R-C.69450e9d9711b8e663811fdbaabadb54?rik=RUeeI6laXGvjlQ&riu=http%3a%2f%2fimg95.699pic.com%2fphoto%2f50140%2f6207.jpg_wh300.jpg!%2ffh%2f300%2fquality%2f90&ehk=BF%2bxxkRwIZ9umJHCiMUS%2baGbUYltfHRg8%2bUTkcP3OU8%3d&risl=&pid=ImgRaw&r=0');
+        }
+
+        .slide-3 {
+            background-image: url('https://pic.nximg.cn/file/20231008/21810476_163332446108_2.jpg');
+        }
+
+        .slide-4 {
+            background-image: url('https://img95.699pic.com/photo/50124/9421.jpg_wh860.jpg');
+        }
+
+        .slide-5 {
+            background-image: url('https://ts1.tc.mm.bing.net/th/id/R-C.0328764d5c8515d08e36a6324ce89ebf?rik=PeKOKAp8ntCsAg&riu=http%3a%2f%2fk.sinaimg.cn%2fn%2fsinacn20109%2f202%2fw600h402%2f20190218%2fe748-htacqww4051785.jpg%2fw700d1q75cms.jpg&ehk=%2b%2bV0MZV%2buAD00ASBOYYO3cSCeOPHyIlFFs0%2fYF9V9i0%3d&risl=&pid=ImgRaw&r=0');
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            text-align: center;
+            color: white;
+            width: 100%;
+            padding: 0 20px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        /* 轮播控制按钮 */
+        .carousel-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.3);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+            .carousel-control:hover {
+                background: rgba(0,0,0,0.6);
+            }
+
+        .prev-btn {
+            left: 20px;
+        }
+
+        .next-btn {
+            right: 20px;
+        }
+
+        /* 轮播指示器 */
+        .carousel-indicators {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 20;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+            .indicator.active {
+                background: white;
+                transform: scale(1.2);
+            }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .hero {
+                height: 60vh;
+                min-height: 400px;
+            }
+
+            .carousel-control {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+
+            .indicator {
+                width: 10px;
+                height: 10px;
+            }
+        }
+
+        /* 原有样式保持不变 */
+        /* 辣度样式 */
+        .spicy-dot {
+            font-size: 12px;
+            margin-right: 2px;
+        }
+
+            .spicy-dot.active {
+                color: #e74c3c;
+            }
+
+            .spicy-dot:not(.active) {
+                opacity: 0.3;
+            }
+
+        .spiciness-level {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        /* 搜索结果样式 */
+        .result-count {
+            color: #666;
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+            .no-results i {
+                font-size: 48px;
+                margin-bottom: 20px;
+                color: #ddd;
+            }
+
+            .no-results p {
+                font-size: 16px;
+            }
+
+        /* 搜索框样式增强 */
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: rgba(255,255,255,0.15);
+            border-radius: 25px;
+            padding: 5px 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+            .search-box input {
+                border: none;
+                background: transparent;
+                color: #fff;
+                padding: 8px;
+                width: 180px;
+                font-size: 14px;
+            }
+
+                .search-box input::placeholder {
+                    color: rgba(255,255,255,0.7);
+                }
+
+                .search-box input:focus {
+                    outline: none;
+                }
+
+            .search-box button {
+                background: transparent;
+                border: none;
+                color: #fff;
+                cursor: pointer;
+                padding: 5px 10px;
+            }
+
+                .search-box button:hover {
+                    color: #ffc107;
+                }
+
+        /* 头部搜索框 */
+        .header-actions {
+            margin-left: auto;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .search-box {
+                display: none;
+            }
+        }
+
+        /* Hero搜索框 */
+        .hero-search {
+            display: flex;
+            max-width: 600px;
+            margin: 30px auto 0;
+            gap: 10px;
+        }
+
+            .hero-search input {
+                flex: 1;
+                padding: 15px 25px;
+                border: none;
+                border-radius: 30px;
+                font-size: 16px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            }
+
+                .hero-search input:focus {
+                    outline: none;
+                    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+                }
+
+            .hero-search button {
+                padding: 15px 35px;
+                background: #c8102e;
+                color: white;
+                border: none;
+                border-radius: 30px;
+                font-size: 16px;
+                cursor: pointer;
+                transition: all 0.3s;
+            }
+
+                .hero-search button:hover {
+                    background: #a00d24;
+                    transform: translateY(-2px);
+                }
+
+        /* 区域图标 */
+        .region-icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        /* 响应式搜索框 */
+        @media (max-width: 480px) {
+            .hero-search {
+                flex-direction: column;
+                padding: 0 20px;
+            }
+
+                .hero-search button {
+                    width: 100%;
+                }
+        }
+
+        /* 热门美食标题样式优化 - 新增 */
+        .section {
+            margin: 40px 0;
+        }
+
+        .section-header {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin: 0;
+            position: relative;
+            padding-left: 16px;
+        }
+
+            .section-title::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 4px;
+                height: 28px;
+                background-color: #c8102e; /* 与设计图红色一致 */
+            }
+
+        .section-subtitle {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* 区域导航样式 */
+        .region-nav {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .region-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .region-card::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 4px;
+                border-radius: 0 0 12px 12px;
+            }
+
+            .region-card.main::after {
+                background-color: #e74c3c;
+            }
+
+            .region-card.west::after {
+                background-color: #f39c12;
+            }
+
+            .region-card.northeast::after {
+                background-color: #3498db;
+            }
+
+            .region-card.southeast::after {
+                background-color: #27ae60;
+            }
+
+            .region-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            }
+
+            .region-card h3 {
+                font-size: 22px;
+                font-weight: 600;
+                margin: 10px 0;
+                color: #2c3e50;
+            }
+
+            .region-card p {
+                font-size: 14px;
+                color: #666;
+                line-height: 1.5;
+            }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #fafafa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .inland-security-footer {
+            position: fixed;
+            z-index: 10;
+            bottom: 0;
+            right: 0;
+            width: fit-content;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .tooltip-container {
+            position: relative;
+        }
+
+        .trigger-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            background-color: transparent;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .minimax-link {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 300;
+            color: #adadad;
+            text-decoration: none;
+        }
+
+            .minimax-link:visited {
+                color: #adadad;
+            }
+
+            .minimax-link:hover {
+                color: #666666;
+            }
+
+        .tooltip-content {
+            position: absolute;
+            bottom: 100%;
+            right: 0;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 8px;
+            padding-bottom: 16px;
+            font-size: 12px;
+            line-height: 17px;
+            background-color: #fafafa;
+            border-radius: 12px;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            color: #171717;
+        }
+
+            .tooltip-content::after {
+                content: '';
+                position: absolute;
+                bottom: -8px;
+                left: 0;
+                right: 0;
+                height: 16px;
+            }
+
+        .tooltip-container:hover .tooltip-content {
+            display: flex;
+        }
+
+        .info-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .beian-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #171717;
+        }
+
+        .beian-icon {
+            width: 14px;
+            height: 14px;
+            margin-right: 2px;
+        }
+
+        .underline-text {
+            color: #171717;
+            text-decoration: underline;
+        }
+
+            .underline-text:hover {
+                color: #000000;
+            }
+
+        @media (prefers-color-scheme: dark) {
+            .trigger-content {
+                background-color: transparent;
+            }
+
+            .minimax-link,
+            .minimax-link:visited {
+                color: #666666;
+            }
+
+                .minimax-link:hover {
+                    color: #adadad;
+                }
+
+            .tooltip-content {
+                background-color: #262626;
+                color: #ededed;
+            }
+
+            .beian-link,
+            .underline-text {
+                color: #ededed;
+            }
+
+                .underline-text:hover {
+                    color: #ffffff;
+                }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部 -->
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-pepper-hot"></i>
+                    </div>
+                    <span>寻味山城</span>
+                </a>
+                <button class="mobile-menu-btn" onclick="toggleMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav id="mainNav">
+                    <ul>
+                        <li><a href="index.html" class="active">首页</a></li>
+                        <li><a href="main-city.html">主城都市区</a></li>
+                        <li><a href="west-chongqing.html">渝西片区</a></li>
+                        <li><a href="northeast-chongqing.html">渝东北片区</a></li>
+                        <li><a href="southeast-chongqing.html">渝东南片区</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="搜索美食，区县...">
+                        <button id="searchBtn"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 改造后的英雄区域（添加轮播） -->
+        <section class="hero">
+            <div class="carousel-container">
+                <!-- 轮播图片 -->
+                <div class="carousel-slide slide-1 active"></div>
+                <div class="carousel-slide slide-2"></div>
+                <div class="carousel-slide slide-3"></div>
+                <div class="carousel-slide slide-4"></div>
+                <div class="carousel-slide slide-5"></div>
+
+                <!-- 轮播控制按钮 -->
+                <button class="carousel-control prev-btn" onclick="changeSlide(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-control next-btn" onclick="changeSlide(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+
+                <!-- 轮播指示器 -->
+                <div class="carousel-indicators">
+                    <div class="indicator active" onclick="goToSlide(0)"></div>
+                    <div class="indicator" onclick="goToSlide(1)"></div>
+                    <div class="indicator" onclick="goToSlide(2)"></div>
+                    <div class="indicator" onclick="goToSlide(3)"></div>
+                    <div class="indicator" onclick="goToSlide(4)"></div>
+                </div>
+
+                <!-- 原有内容保持不变 -->
+                <div class="hero-content">
+                    <h1>寻味山城 重庆美食</h1>
+                    <p>探索重庆38区县的特色美食，感受巴渝美食文化的独特魅力</p>
+                    <div class="hero-search">
+                        <input type="text" id="heroSearchInput" placeholder="搜索区县或美食名称，如：火锅、鸡杂、渝中区...">
+                        <button id="heroSearchBtn">搜索</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <!-- 热门美食推荐标题 - 放在城区卡片上方 -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">热门美食推荐</h2>
+                    <span class="section-subtitle">点击卡片查看详情</span>
+                </div>
+            </section>
+
+            <!-- 区域导航 -->
+            <section class="region-nav">
+                <a href="main-city.html" class="region-card main">
+                    <div class="region-icon"><i class="fas fa-city"></i></div>
+                    <h3>主城都市区</h3>
+                    <p>渝中、江北、南岸、沙坪坝等9区</p>
+                </a>
+                <a href="west-chongqing.html" class="region-card west">
+                    <div class="region-icon"><i class="fas fa-mountain"></i></div>
+                    <h3>渝西片区</h3>
+                    <p>永川，合川、江津、大足等8区县</p>
+                </a>
+                <a href="northeast-chongqing.html" class="region-card northeast">
+                    <div class="region-icon"><i class="fas fa-water"></i></div>
+                    <h3>渝东北片区</h3>
+                    <p>万州、开州、云阳等11区县</p>
+                </a>
+                <a href="southeast-chongqing.html" class="region-card southeast">
+                    <div class="region-icon"><i class="fas fa-tree"></i></div>
+                    <h3>渝东南片区</h3>
+                    <p>黔江、武隆、酉阳等6区县</p>
+                </a>
+            </section>
+
+            <!-- 搜索结果区域 -->
+            <section id="searchResults" class="section" style="display: none;">
+                <div class="section-header">
+                    <h2 class="section-title">搜索结果</h2>
+                    <span id="resultCount" class="result-count"></span>
+                </div>
+                <div id="foodGridSearch" class="grid grid-3">
+                    <!-- 搜索结果将通过JS动态渲染 -->
+                </div>
+            </section>
+
+            <!-- 更多美食 -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">各区县特色</h2>
+                </div>
+                <div class="grid grid-3">
+                    <div class="card food-card" onclick="window.location.href='nanshan-chicken.html'">
+                        <div class="card-image">
+                            <img src="https://ts3.tc.mm.bing.net/th/id/OIP-C.bXWVF4iX8YXaL0UYqZ5e5QHaEk?rs=1&pid=ImgDetMain&o=7&rm=3" alt="南山泉水鸡">
+                            <span class="card-badge">特色</span>
+                        </div>
+                        <div class="card-content">
+                            <h3>南山泉水鸡</h3>
+                            <p class="description">源于南山，用泉水烹制，佐以数十种香料，味道浓郁</p>
+                            <div class="tags">
+                                <span class="tag">南岸区</span>
+                                <span class="tag">鸡肉</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card food-card" onclick="window.location.href='qianjiang-jiza.html'">
+                        <div class="card-image">
+                            <img src="https://ts3.tc.mm.bing.net/th/id/OIP-C.rxpijIup-Kc0RXyQzP6nFQHaFj?rs=1&pid=ImgDetMain&o=7&rm=3" alt="黔江鸡杂">
+                            <span class="card-badge">招牌</span>
+                        </div>
+                        <div class="card-content">
+                            <h3>黔江鸡杂</h3>
+                            <p class="description">运用土家烹饪方式，泡椒味浓郁，酸辣开胃</p>
+                            <div class="tags">
+                                <span class="tag">黔江区</span>
+                                <span class="tag">内脏</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card food-card" onclick="window.location.href='hechuan-roupian.html'">
+                        <div class="card-image">
+                            <img src="https://bkimg.cdn.bcebos.com/pic/bd315c6034a85edf8124495146540923dd547513?x-bce-process=image/format,f_auto/watermark,image_d2F0ZXIvYmFpa2UyNzI,g_7,xp_5,yp_5,P_20/resize,m_lfit,limit_1,h_1080" alt="合川肉片">
+                        </div>
+                        <div class="card-content">
+                            <h3>合川肉片</h3>
+                            <p class="description">外酥里嫩，酸甜适口，是合川的传统名菜</p>
+                            <div class="tags">
+                                <span class="tag">合川区</span>
+                                <span class="tag">肉类</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 统计区域 -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h3>38</h3>
+                        <p>覆盖区县</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>500+</h3>
+                        <p>特色美食</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>1000+</h3>
+                        <p>推荐店铺</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>100万+</h3>
+                        <p>美食爱好者</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <!-- 区县地图 -->
+            <section class="map-section">
+                <div class="section-header">
+                    <h2 class="section-title">区县美食快速导航</h2>
+                </div>
+                <div class="map-grid">
+                    <a href="yuzhong-hotpot.html" class="map-item">渝中区</a>
+                    <a href="main-city.html" class="map-item">江北区</a>
+                    <a href="main-city.html" class="map-item">南岸区</a>
+                    <a href="main-city.html" class="map-item">沙坪坝区</a>
+                    <a href="main-city.html" class="map-item">九龙坡区</a>
+                    <a href="main-city.html" class="map-item">大渡口区</a>
+                    <a href="main-city.html" class="map-item">北碚区</a>
+                    <a href="main-city.html" class="map-item">渝北区</a>
+                    <a href="main-city.html" class="map-item">巴南区</a>
+                    <a href="wanzhou-fish.html" class="map-item">万州区</a>
+                    <a href="west-chongqing.html" class="map-item">涪陵区</a>
+                    <a href="west-chongqing.html" class="map-item">永川区</a>
+                    <a href="west-chongqing.html" class="map-item">合川区</a>
+                    <a href="west-chongqing.html" class="map-item">江津区</a>
+                    <a href="west-chongqing.html" class="map-item">大足区</a>
+                    <a href="west-chongqing.html" class="map-item">璧山区</a>
+                    <a href="west-chongqing.html" class="map-item">铜梁区</a>
+                    <a href="west-chongqing.html" class="map-item">潼南区</a>
+                    <a href="west-chongqing.html" class="map-item">荣昌区</a>
+                    <a href="northeast-chongqing.html" class="map-item">开州区</a>
+                    <a href="northeast-chongqing.html" class="map-item">梁平区</a>
+                    <a href="northeast-chongqing.html" class="map-item">武隆区</a>
+                    <a href="northeast-chongqing.html" class="map-item">丰都县</a>
+                    <a href="northeast-chongqing.html" class="map-item">忠县</a>
+                    <a href="northeast-chongqing.html" class="map-item">云阳县</a>
+                    <a href="northeast-chongqing.html" class="map-item">奉节县</a>
+                    <a href="northeast-chongqing.html" class="map-item">巫山县</a>
+                    <a href="northeast-chongqing.html" class="map-item">巫溪县</a>
+                    <a href="northeast-chongqing.html" class="map-item">城口县</a>
+                    <a href="southeast-chongqing.html" class="map-item">黔江区</a>
+                    <a href="southeast-chongqing.html" class="map-item">武隆区</a>
+                    <a href="southeast-chongqing.html" class="map-item">石柱县</a>
+                    <a href="southeast-chongqing.html" class="map-item">秀山县</a>
+                    <a href="southeast-chongqing.html" class="map-item">酉阳县</a>
+                    <a href="southeast-chongqing.html" class="map-item">彭水县</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 底部 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-pepper-hot"></i>
+                        </div>
+                        <span>寻味山城</span>
+                    </a>
+                    <p>致力于传播重庆美食文化，为美食爱好者提供全面的重庆美食资讯。</p>
+                </div>
+                <div class="footer-links">
+                    <h4>区域美食</h4>
+                    <ul>
+                        <li><a href="main-city.html">主城都市区</a></li>
+                        <li><a href="west-chongqing.html">渝西片区</a></li>
+                        <li><a href="northeast-chongqing.html">渝东北片区</a></li>
+                        <li><a href="southeast-chongqing.html">渝东南片区</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>热门美食</h4>
+                    <ul>
+                        <li><a href="yuzhong-hotpot.html">重庆火锅</a></li>
+                        <li><a href="wanzhou-fish.html">万州烤鱼</a></li>
+                        <li><a href="geleshan-chicken.html">辣子鸡</a></li>
+                        <li><a href="nanshan-chicken.html">泉水鸡</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>关于我们</h4>
+                    <ul>
+                        <li><a href="#">网站介绍</a></li>
+                        <li><a href="#">联系方式</a></li>
+                        <li><a href="#">隐私政策</a></li>
+                        <li><a href="#">使用条款</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 寻味山城. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/food-data.js"></script>
+    <script>
+        function toggleMenu() {
+            document.getElementById('mainNav').classList.toggle('active');
+        }
+
+        // 轮播功能实现
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const indicators = document.querySelectorAll('.indicator');
+        const slideInterval = 5000; // 自动轮播间隔（毫秒）
+        let intervalId;
+
+        // 初始化自动轮播
+        function startSlideInterval() {
+            intervalId = setInterval(() => {
+                changeSlide(1);
+            }, slideInterval);
+        }
+
+        // 切换轮播图
+        function changeSlide(direction) {
+            // 清除当前自动轮播
+            clearInterval(intervalId);
+
+            // 计算新的轮播索引
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            updateSlides();
+
+            // 重新开始自动轮播
+            startSlideInterval();
+        }
+
+        // 跳转到指定轮播图
+        function goToSlide(index) {
+            clearInterval(intervalId);
+            currentSlide = index;
+            updateSlides();
+            startSlideInterval();
+        }
+
+        // 更新轮播显示状态
+        function updateSlides() {
+            // 更新轮播图片显示
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+
+            // 更新指示器状态
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // 初始化轮播
+        document.addEventListener('DOMContentLoaded', function () {
+            startSlideInterval();
+
+            // 鼠标悬停时暂停轮播
+            const carouselContainer = document.querySelector('.carousel-container');
+            carouselContainer.addEventListener('mouseenter', () => {
+                clearInterval(intervalId);
+            });
+
+            // 鼠标离开时恢复轮播
+            carouselContainer.addEventListener('mouseleave', () => {
+                startSlideInterval();
+            });
+        });
+    </script>
+
+    <div class="inland-security-footer">
+        <div class="tooltip-container">
+            <div class="trigger-content">
+                <a href="https://www.minimaxi.com/" target="_blank" rel="noreferrer" class="minimax-link">
+                    <span>© 2026 MiniMax</span>
+                </a>
+            </div>
+            <div class="tooltip-content">
+                <section class="info-section">
+                    <span>上海稀宇科技有限公司</span>
+                </section>
+                <section class="info-section">
+                    <a class="beian-link" href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31010402010179" target="_blank" rel="noreferrer">
+                        <img alt="hailuo-beian-icon" src="https://cdn.hailuoai.com/hailuo-video-web/public_assets/223037d3-79fd-4db0-a456-749f38a6a14b.png" class="beian-icon">
+                        <span class="underline-text">沪公网安备31010402010179号</span>
+                    </a>
+                    <a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer" class="underline-text">
+                        沪ICP备2023003282号-38
+                    </a>
+                </section>
+                <section class="info-section">
+                    <span>模型名称：MiniMax</span>
+                    <span>备案号：Shanghai-MiniMax-202505230046</span>
+                </section>
+                <section class="info-section">
+                    <a href="https://agent.minimaxi.com/doc/zh/terms-of-service.html" target="_blank" rel="noreferrer" class="underline-text">
+                        用户协议
+                    </a>
+                    <a href="https://agent.minimaxi.com/doc/zh/privacy-policy.html" target="_blank" rel="noreferrer" class="underline-text">
+                        隐私政策
+                    </a>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            "use strict";
+            if (window.self === window.top) { return; }
+            if (window.__iframeHighlightInitialized) { return; }
+            window.__iframeHighlightInitialized = true;
+            console.log("Iframe 高亮脚本已加载");
+            var overlay = document.createElement("div");
+            overlay.id = "iframe-highlight-overlay";
+            overlay.style.cssText = "\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100vw;\n    height: 100vh;\n    pointer-events: none;\n    z-index: 999999;\n    overflow: hidden;\n  ";
+            var highlightBox = document.createElement("div");
+            highlightBox.id = "iframe-highlight-box";
+            highlightBox.style.cssText = "\n    position: absolute;\n    border: 2px dashed #007AFF;\n    background: rgba(0, 122, 255, 0.08);\n    pointer-events: none;\n    display: none;\n    transition: all 0.1s ease;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);\n    border-radius: 2px;\n  ";
+            var selectedBox = document.createElement("div");
+            selectedBox.id = "iframe-selected-box";
+            selectedBox.style.cssText = "\n    position: absolute;\n    border: 2px solid #007AFF;\n    pointer-events: none;\n    display: none;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9), 0 0 8px rgba(255, 107, 53, 0.4);\n    border-radius: 2px;\n    z-index: 1000000;\n  ";
+            var tagLabel = document.createElement("div");
+            tagLabel.id = "iframe-tag-label";
+            tagLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 2px 6px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 2px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000001;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);\n    font-weight: 500;\n  ";
+            var selectedLabel = document.createElement("div");
+            selectedLabel.id = "iframe-selected-label";
+            selectedLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 3px 8px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 3px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000002;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);\n    font-weight: 600;\n  ";
+            overlay.appendChild(highlightBox);
+            overlay.appendChild(selectedBox);
+            overlay.appendChild(tagLabel);
+            overlay.appendChild(selectedLabel);
+            document.body.appendChild(overlay);
+            var selectedElement = null;
+            var highlightEnabled = false;
+            function updateSelectedHighlight(element) {
+                if (!element) {
+                    selectedBox.style.display = "none";
+                    selectedLabel.style.display = "none";
+                    selectedElement = null;
+                    return;
+                }
+                selectedElement = element;
+                var rect = element.getBoundingClientRect();
+                selectedBox.style.display = "block";
+                selectedBox.style.left = "".concat(rect.left - 2, "px");
+                selectedBox.style.top = "".concat(rect.top - 2, "px");
+                selectedBox.style.width = "".concat(rect.width + 4, "px");
+                selectedBox.style.height = "".concat(rect.height + 4, "px");
+                selectedLabel.style.display = "block";
+                selectedLabel.textContent = "\u2713 <".concat(element.tagName.toLowerCase(), ">");
+                var labelTop = rect.top - 28;
+                var labelLeft = rect.left;
+                if (labelTop < 5) { labelTop = rect.bottom + 5; }
+                var labelWidth = selectedLabel.offsetWidth || 100;
+                if (labelLeft + labelWidth > window.innerWidth - 10) { labelLeft = window.innerWidth - labelWidth - 10; }
+                selectedLabel.style.left = "".concat(Math.max(5, labelLeft), "px");
+                selectedLabel.style.top = "".concat(labelTop, "px");
+            }
+            function getElementSelector(element) {
+                if (!(element instanceof Element)) throw new Error('Argument must be a DOM element');
+                var segments = [];
+                var current = element;
+                while (current !== document.documentElement) {
+                    var selector = '';
+                    if (current.id && document.querySelectorAll("#".concat(current.id)).length === 1) {
+                        segments.unshift("#".concat(current.id));
+                        break;
+                    }
+                    var classes = Array.from(current.classList).filter(function (c) { return !c.startsWith('js-'); });
+                    var className = classes.length > 0 ? ".".concat(classes[0]) : '';
+                    var tag = current.tagName.toLowerCase();
+                    if (!className) {
+                        var siblings = Array.from(current.parentNode.children);
+                        var index = siblings.findIndex(function (el) { return el === current; }) + 1;
+                        selector = "".concat(tag, ":nth-child(").concat(index, ")");
+                    } else { selector = className; }
+                    segments.unshift(selector);
+                    current = current.parentElement;
+                }
+                if (current === document.documentElement) { segments.unshift('html'); }
+                return segments.join(' > ');
+            }
+            function getElementText(element) {
+                if (element.tagName === "INPUT") { return element.value || element.placeholder || ""; }
+                if (element.tagName === "TEXTAREA") { return element.value || element.placeholder || ""; }
+                var text = element.textContent || "";
+                return text.length > 50 ? text.substring(0, 50) + "..." : text;
+            }
+            function getElementAttributes(element) {
+                var attrs = {};
+                for (var i = 0; i < element.attributes.length; i++) {
+                    var attr = element.attributes[i];
+                    attrs[attr.name] = attr.value;
+                }
+                return attrs;
+            }
+            function handleMouseOver(e) {
+                if (!highlightEnabled) return;
+                var target = e.target;
+                if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) { return; }
+                if (target === document.documentElement || target === document.body) { return; }
+                if (target === selectedElement) { highlightBox.style.display = "none"; tagLabel.style.display = "none"; return; }
+                var rect = target.getBoundingClientRect();
+                var selector = getElementSelector(target);
+                var text = getElementText(target);
+                var attributes = getElementAttributes(target);
+                highlightBox.style.display = "block";
+                highlightBox.style.left = "".concat(rect.left - 2, "px");
+                highlightBox.style.top = "".concat(rect.top - 2, "px");
+                highlightBox.style.width = "".concat(rect.width + 4, "px");
+                highlightBox.style.height = "".concat(rect.height + 4, "px");
+                tagLabel.style.display = "block";
+                tagLabel.textContent = "<".concat(target.tagName.toLowerCase(), ">");
+                var labelTop = rect.top - 22;
+                var labelLeft = rect.left;
+                if (labelTop < 0) { labelTop = rect.bottom + 5; }
+                if (labelLeft + tagLabel.offsetWidth > window.innerWidth) { labelLeft = window.innerWidth - tagLabel.offsetWidth - 5; }
+                tagLabel.style.left = "".concat(Math.max(0, labelLeft), "px");
+                tagLabel.style.top = "".concat(labelTop, "px");
+            }
+            function handleMouseOut(e) {
+                if (!highlightEnabled) return;
+                var relatedTarget = e.relatedTarget;
+                if (relatedTarget && (relatedTarget === highlightBox || relatedTarget === tagLabel || relatedTarget === overlay || relatedTarget === selectedBox || relatedTarget === selectedLabel)) { return; }
+                highlightBox.style.display = "none";
+                tagLabel.style.display = "none";
+            }
+            function handleClick(e) {
+                var target = e.target;
+                if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) { return; }
+                if (target === document.documentElement || target === document.body) { return; }
+                if (highlightEnabled) { e.preventDefault(); e.stopPropagation(); }
+                var rect = target.getBoundingClientRect();
+                updateSelectedHighlight(target);
+                highlightBox.style.display = "none";
+                tagLabel.style.display = "none";
+            }
+            function handleParentMessage(event) {
+                if (event.data.type === "iframe-highlight-toggle") {
+                    var enabled = event.data.enabled;
+                    if (enabled) { enableHighlight(); } else { disableHighlight(); }
+                } else if (event.data.type === "enable-iframe-highlight") {
+                    enableHighlight();
+                } else if (event.data.type === "disable-iframe-highlight") {
+                    disableHighlight();
+                } else if (event.data.type === "update-selected-element") {
+                    var selector = event.data.selector;
+                    if (selector) {
+                        try {
+                            var element = document.querySelector(selector);
+                            updateSelectedHighlight(element);
+                        } catch (error) { updateSelectedHighlight(null); }
+                    } else { updateSelectedHighlight(null); }
+                } else if (event.data.type === "clear-selected-element") {
+                    updateSelectedHighlight(null);
+                }
+            }
+            function enableHighlight() {
+                document.addEventListener("mouseover", handleMouseOver, true);
+                document.addEventListener("mouseout", handleMouseOut, true);
+                document.addEventListener("click", handleClick, true);
+                highlightEnabled = true;
+                overlay.style.display = "block";
+            }
+            function disableHighlight() {
+                highlightEnabled = false;
+                highlightBox.style.display = "none";
+                tagLabel.style.display = "none";
+            }
+            function fullyDisableHighlight() {
+                highlightEnabled = false;
+                document.removeEventListener("mouseover", handleMouseOver, true);
+                document.removeEventListener("mouseout", handleMouseOut, true);
+                document.removeEventListener("click", handleClick, true);
+                overlay.style.display = "none";
+                highlightBox.style.display = "none";
+                tagLabel.style.display = "none";
+                selectedBox.style.display = "none";
+                selectedLabel.style.display = "none";
+            }
+            enableHighlight();
+            window.addEventListener("message", handleParentMessage);
+            window.__iframeHighlightControl = {
+                enable: enableHighlight, disable: disableHighlight, fullyDisable: fullyDisableHighlight,
+                isEnabled: function () { return highlightEnabled; },
+                getSelectedElement: function () { return selectedElement; },
+                updateSelected: updateSelectedHighlight
+            };
+            window.__iframeHighlightCleanup = function () {
+                fullyDisableHighlight();
+                window.removeEventListener("message", handleParentMessage);
+                if (overlay.parentElement) { overlay.parentElement.removeChild(overlay); }
+                delete window.__iframeHighlightInitialized;
+                delete window.__iframeHighlightCleanup;
+            };
+        })();
+    </script>
+
+    <script>
+        /**
+         * Iframe 元素高亮注入脚本
+         * 需要在目标网站中引入此脚本来支持跨域 iframe 高亮功能
+         *
+         * 使用方法：
+         * 1. 将此脚本添加到目标网站的 HTML 中
+         * 2. 或通过浏览器扩展、用户脚本等方式注入
+         */
+
+        (function () {
+            "use strict";
+
+            // 检查是否在 iframe 中
+            if (window.self === window.top) {
+                return; // 不在 iframe 中，不执行
+            }
+
+            // 检查是否已经初始化过
+            if (window.__iframeHighlightInitialized) {
+                return;
+            }
+            window.__iframeHighlightInitialized = true;
+            console.log("Iframe 高亮脚本已加载");
+
+            // 创建高亮覆盖层
+            var overlay = document.createElement("div");
+            overlay.id = "iframe-highlight-overlay";
+            overlay.style.cssText = "\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100vw;\n    height: 100vh;\n    pointer-events: none;\n    z-index: 999999;\n    overflow: hidden;\n  ";
+
+            // 创建悬停高亮框（虚线边框）
+            var highlightBox = document.createElement("div");
+            highlightBox.id = "iframe-highlight-box";
+            highlightBox.style.cssText = "\n    position: absolute;\n    border: 2px dashed #007AFF;\n    background: rgba(0, 122, 255, 0.08);\n    pointer-events: none;\n    display: none;\n    transition: all 0.1s ease;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);\n    border-radius: 2px;\n  ";
+
+            // 创建选中节点的常驻高亮框（实线边框）
+            var selectedBox = document.createElement("div");
+            selectedBox.id = "iframe-selected-box";
+            selectedBox.style.cssText = "\n    position: absolute;\n    border: 2px solid #007AFF;\n    pointer-events: none;\n    display: none;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9), 0 0 8px rgba(255, 107, 53, 0.4);\n    border-radius: 2px;\n    z-index: 1000000;\n  ";
+
+            // 创建悬停标签显示
+            var tagLabel = document.createElement("div");
+            tagLabel.id = "iframe-tag-label";
+            tagLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 2px 6px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 2px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000001;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);\n    font-weight: 500;\n  ";
+
+            // 创建选中节点标签
+            var selectedLabel = document.createElement("div");
+            selectedLabel.id = "iframe-selected-label";
+            selectedLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 3px 8px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 3px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000002;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);\n    font-weight: 600;\n  ";
+            overlay.appendChild(highlightBox);
+            overlay.appendChild(selectedBox);
+            overlay.appendChild(tagLabel);
+            overlay.appendChild(selectedLabel);
+            document.body.appendChild(overlay);
+
+            // 存储当前选中的元素
+            var selectedElement = null;
+            var highlightEnabled = false;
+
+            // 更新选中元素的高亮显示
+            function updateSelectedHighlight(element) {
+                console.log("updateSelectedHighlight called with:", element);
+                if (!element) {
+                    selectedBox.style.display = "none";
+                    selectedLabel.style.display = "none";
+                    selectedElement = null;
+                    console.log("Cleared selected highlight");
+                    return;
+                }
+                selectedElement = element;
+                var rect = element.getBoundingClientRect();
+                console.log("Selected element rect:", rect);
+
+                // 更新选中高亮框位置
+                selectedBox.style.display = "block";
+                selectedBox.style.left = "".concat(rect.left - 2, "px");
+                selectedBox.style.top = "".concat(rect.top - 2, "px");
+                selectedBox.style.width = "".concat(rect.width + 4, "px");
+                selectedBox.style.height = "".concat(rect.height + 4, "px");
+
+                // 更新选中标签位置和内容
+                selectedLabel.style.display = "block";
+                selectedLabel.textContent = "\u2713 <".concat(element.tagName.toLowerCase(), ">");
+
+                // 计算标签位置，确保不超出视窗
+                var labelTop = rect.top - 28;
+                var labelLeft = rect.left;
+
+                // 如果标签会超出顶部，显示在元素下方
+                if (labelTop < 5) {
+                    labelTop = rect.bottom + 5;
+                }
+
+                // 如果标签会超出右侧，向左调整
+                var labelWidth = selectedLabel.offsetWidth || 100; // 预估宽度
+                if (labelLeft + labelWidth > window.innerWidth - 10) {
+                    labelLeft = window.innerWidth - labelWidth - 10;
+                }
+                selectedLabel.style.left = "".concat(Math.max(5, labelLeft), "px");
+                selectedLabel.style.top = "".concat(labelTop, "px");
+                console.log("Selected highlight positioned at:", {
+                    left: selectedBox.style.left,
+                    top: selectedBox.style.top,
+                    width: selectedBox.style.width,
+                    height: selectedBox
