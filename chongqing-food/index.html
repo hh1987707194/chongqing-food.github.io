@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -712,11 +714,13 @@
                     </div>
                     <div class="card food-card" onclick="window.location.href='hechuan-roupian.html'">
                         <div class="card-image">
-                            <img src="https://bkimg.cdn.bcebos.com/pic/bd315c6034a85edf8124495146540923dd547513?x-bce-process=image/format,f_auto/watermark,image_d2F0ZXIvYmFpa2UyNzI,g_7,xp_5,yp_5,P_20/resize,m_lfit,limit_1,h_1080" alt="合川肉片">
+                            <img src="https://ts3.tc.mm.bing.net/th/id/OIP-C.bXWVF4iX8YXaL0UYqZ5e5QHaEk?rs=1&pid=ImgDetMain&o=7&rm=3" alt="合川肉片">
+                            <span class="card-badge">美食</span>
                         </div>
                         <div class="card-content">
                             <h3>合川肉片</h3>
                             <p class="description">外酥里嫩，酸甜适口，是合川的传统名菜</p>
+                            <span class="card-badge">美食</span>
                             <div class="tags">
                                 <span class="tag">合川区</span>
                                 <span class="tag">肉类</span>
@@ -913,6 +917,124 @@
             carouselContainer.addEventListener('mouseleave', () => {
                 startSlideInterval();
             });
+
+            // ========== 修复搜索功能 - 开始 ==========
+            // 定义模拟的美食数据（如果food-data.js不存在，使用这个备用数据）
+            const foodData = window.foodData || [
+                { name: '重庆火锅', area: '渝中区', description: '重庆经典美食，麻辣鲜香', tags: ['火锅', '麻辣'] },
+                { name: '南山泉水鸡', area: '南岸区', description: '源于南山，用泉水烹制，佐以数十种香料，味道浓郁', tags: ['鸡肉', '特色'] },
+                { name: '黔江鸡杂', area: '黔江区', description: '运用土家烹饪方式，泡椒味浓郁，酸辣开胃', tags: ['内脏', '招牌'] },
+                { name: '合川肉片', area: '合川区', description: '外酥里嫩，酸甜适口，是合川的传统名菜', tags: ['肉类', '经典'] },
+                { name: '万州烤鱼', area: '万州区', description: '外皮焦香，内里鲜嫩，多种口味可选', tags: ['鱼类', '招牌'] },
+                { name: '歌乐山辣子鸡', area: '沙坪坝区', description: '麻辣鲜香，外酥里嫩，重庆江湖菜代表', tags: ['鸡肉', '麻辣'] },
+                { name: '磁器口陈麻花', area: '沙坪坝区', description: '酥脆香甜，重庆特色小吃', tags: ['小吃', '甜点'] },
+                { name: '涪陵榨菜', area: '涪陵区', description: '重庆特产，脆爽可口', tags: ['咸菜', '特产'] }
+            ];
+
+            // 搜索功能实现
+            function performSearch(searchTerm) {
+                // 清空搜索框首尾空格并转为小写
+                searchTerm = searchTerm.trim().toLowerCase();
+                
+                // 如果搜索词为空，重置页面
+                if (!searchTerm) {
+                    document.getElementById('searchResults').style.display = 'none';
+                    return;
+                }
+
+                // 筛选匹配的结果
+                const results = foodData.filter(item => 
+                    item.name.toLowerCase().includes(searchTerm) || 
+                    item.area.toLowerCase().includes(searchTerm) ||
+                    item.tags.some(tag => tag.toLowerCase().includes(searchTerm))
+                );
+
+                // 显示搜索结果区域
+                const searchResultsEl = document.getElementById('searchResults');
+                const resultCountEl = document.getElementById('resultCount');
+                const foodGridSearchEl = document.getElementById('foodGridSearch');
+
+                searchResultsEl.style.display = 'block';
+                resultCountEl.textContent = `找到 ${results.length} 个结果`;
+
+                // 清空之前的搜索结果
+                foodGridSearchEl.innerHTML = '';
+
+                // 显示无结果提示
+                if (results.length === 0) {
+                    foodGridSearchEl.innerHTML = `
+                        <div class="no-results">
+                            <i class="fas fa-search"></i>
+                            <p>未找到相关结果，请尝试其他关键词</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // 渲染搜索结果
+                results.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'card food-card';
+                    card.onclick = function() {
+                        // 根据美食名称跳转到对应页面
+                        const pageMap = {
+                            '重庆火锅': 'yuzhong-hotpot.html',
+                            '南山泉水鸡': 'nanshan-chicken.html',
+                            '黔江鸡杂': 'qianjiang-jiza.html',
+                            '合川肉片': 'hechuan-roupian.html',
+                            '万州烤鱼': 'wanzhou-fish.html',
+                            '歌乐山辣子鸡': 'geleshan-chicken.html'
+                        };
+                        const page = pageMap[item.name] || '#';
+                        window.location.href = page;
+                    };
+
+                    card.innerHTML = `
+                        <div class="card-content">
+                            <h3>${item.name}</h3>
+                            <p class="description">${item.description}</p>
+                            <div class="tags">
+                                <span class="tag">${item.area}</span>
+                                ${item.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                            </div>
+                        </div>
+                    `;
+
+                    foodGridSearchEl.appendChild(card);
+                });
+            }
+
+            // 头部搜索框事件绑定
+            const searchInput = document.getElementById('searchInput');
+            const searchBtn = document.getElementById('searchBtn');
+            
+            searchBtn.addEventListener('click', function() {
+                performSearch(searchInput.value);
+            });
+
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch(searchInput.value);
+                }
+            });
+
+            // Hero区域搜索框事件绑定
+            const heroSearchInput = document.getElementById('heroSearchInput');
+            const heroSearchBtn = document.getElementById('heroSearchBtn');
+            
+            heroSearchBtn.addEventListener('click', function() {
+                performSearch(heroSearchInput.value);
+                // 滚动到搜索结果区域
+                document.getElementById('searchResults').scrollIntoView({ behavior: 'smooth' });
+            });
+
+            heroSearchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch(heroSearchInput.value);
+                    document.getElementById('searchResults').scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+            // ========== 修复搜索功能 - 结束 ==========
         });
     </script>
 
@@ -1250,3 +1372,162 @@
                     top: selectedBox.style.top,
                     width: selectedBox.style.width,
                     height: selectedBox
+                });
+            }
+
+            function getElementSelector(element) {
+                if (!(element instanceof Element)) throw new Error('Argument must be a DOM element');
+                var segments = [];
+                var current = element;
+                while (current !== document.documentElement) {
+                    var selector = '';
+                    if (current.id && document.querySelectorAll("#".concat(current.id)).length === 1) {
+                        segments.unshift("#".concat(current.id));
+                        break;
+                    }
+                    var classes = Array.from(current.classList).filter(function (c) { return !c.startsWith('js-'); });
+                    var className = classes.length > 0 ? ".".concat(classes[0]) : '';
+                    var tag = current.tagName.toLowerCase();
+                    if (!className) {
+                        var siblings = Array.from(current.parentNode.children);
+                        var index = siblings.findIndex(function (el) { return el === current; }) + 1;
+                        selector = "".concat(tag, ":nth-child(").concat(index, ")");
+                    } else {
+                        selector = className;
+                    }
+                    segments.unshift(selector);
+                    current = current.parentElement;
+                }
+                if (current === document.documentElement) {
+                    segments.unshift('html');
+                }
+                return segments.join(' > ');
+            }
+
+            function getElementText(element) {
+                if (element.tagName === "INPUT") { return element.value || element.placeholder || ""; }
+                if (element.tagName === "TEXTAREA") { return element.value || element.placeholder || ""; }
+                var text = element.textContent || "";
+                return text.length > 50 ? text.substring(0, 50) + "..." : text;
+            }
+
+            function getElementAttributes(element) {
+                var attrs = {};
+                for (var i = 0; i < element.attributes.length; i++) {
+                    var attr = element.attributes[i];
+                    attrs[attr.name] = attr.value;
+                }
+                return attrs;
+            }
+
+            function handleMouseOver(e) {
+                if (!highlightEnabled) return;
+                var target = e.target;
+                if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) { return; }
+                if (target === document.documentElement || target === document.body) { return; }
+                if (target === selectedElement) { highlightBox.style.display = "none"; tagLabel.style.display = "none"; return; }
+
+                var rect = target.getBoundingClientRect();
+                var selector = getElementSelector(target);
+                var text = getElementText(target);
+                var attributes = getElementAttributes(target);
+
+                highlightBox.style.display = "block";
+                highlightBox.style.left = "".concat(rect.left - 2, "px");
+                highlightBox.style.top = "".concat(rect.top - 2, "px");
+                highlightBox.style.width = "".concat(rect.width + 4, "px");
+                highlightBox.style.height = "".concat(rect.height + 4, "px");
+
+                tagLabel.style.display = "block";
+                tagLabel.textContent = "<".concat(target.tagName.toLowerCase(), ">");
+
+                var labelTop = rect.top - 22;
+                var labelLeft = rect.left;
+                if (labelTop < 0) { labelTop = rect.bottom + 5; }
+                if (labelLeft + tagLabel.offsetWidth > window.innerWidth) { labelLeft = window.innerWidth - tagLabel.offsetWidth - 5; }
+
+                tagLabel.style.left = "".concat(Math.max(0, labelLeft), "px");
+                tagLabel.style.top = "".concat(labelTop, "px");
+            }
+
+            function handleMouseOut(e) {
+                if (!highlightEnabled) return;
+                var relatedTarget = e.relatedTarget;
+                if (relatedTarget && (relatedTarget === highlightBox || relatedTarget === tagLabel || relatedTarget === overlay || relatedTarget === selectedBox || relatedTarget === selectedLabel)) { return; }
+                highlightBox.style.display = "none";
+                tagLabel.style.display = "none";
+            }
+
+            function handleClick(e) {
+                var target = e.target;
+                if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) { return; }
+                if (target === document.documentElement || target === document.body) { return; }
+                if (highlightEnabled) { e.preventDefault(); e.stopPropagation(); }
+
+                var rect = target.getBoundingClientRect();
+                updateSelectedHighlight(target);
+                highlightBox.style.display = "none";
+                tagLabel.style.display = "none";
+            }
+
+            function handleParentMessage(event) {
+                if (event.data.type === "iframe-highlight-toggle") {
+                    var enabled = event.data.enabled;
+                    if (enabled) { enableHighlight(); } else { disableHighlight(); }
+                } else if (event.data.type === "enable-iframe-highlight") {
+                    enableHighlight();
+                } else if (event.data.type === "disable-iframe-highlight") {
+                    disableHighlight();
+                } else if (event.data.type === "update-selected-element") {
+                    var selector = event.data.selector;
+                    if (selector) {
+                        try {
+                            var element = document.querySelector(selector);
+                            updateSelectedHighlight(element);
+                        } catch (error) { updateSelectedHighlight(null); }
+                    } else {
+                        updateSelectedHighlight(null);
+                    }
+                } else if (event.data.type === "clear-selected-element") {
+                    updateSelectedHighlight(null);
+                }
+            }
+
+            function enableHighlight() {
+                document.addEventListener("mouseover", handleMouseOver, true);
+                document.addEventListener("mouseout", handleMouseOut, true);
+                document.addEventListener("click", handleClick, true);
+                highlightEnabled = true;
+                overlay.style.display = "block";
+            }
+
+            function disableHighlight() {
+                highlightEnabled = false;
+                highlightBox.style.display = "none";
+                tagLabel.style.display = "none";
+            }
+
+            function fullyDisableHighlight() {
+                highlightEnabled = false;
+                document.removeEventListener("mouseover", handleMouseOver, true);
+                document.removeEventListener("mouseout", handleMouseOut, true);
+                document.removeEventListener("click", handleClick, true);
+                overlay.style.display = "none";
+                highlightBox.style.display = "none";
+                tagLabel.style.display = "none";
+                selectedBox.style.display = "none";
+                selectedLabel.style.display = "none";
+            }
+
+            // 启用高亮功能
+            enableHighlight();
+
+            // 监听父窗口消息
+            window.addEventListener("message", handleParentMessage);
+
+            // 暴露控制方法到全局
+            window.__iframeHighlightControl = {
+                enable: enableHighlight,
+                disable: disableHighlight,
+                fullyDisable: fullyDisableHighlight,
+                isEnabled: function () { return highlight
