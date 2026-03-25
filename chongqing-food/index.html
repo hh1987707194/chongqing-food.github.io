@@ -1531,3 +1531,49 @@
                 disable: disableHighlight,
                 fullyDisable: fullyDisableHighlight,
                 isEnabled: function () { return highlight
+           <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>重庆美食地图</title>
+  <!-- 引入高德地图 JS API -->
+  <script type="text/javascript" src="https://webapi.amap.com/maps?v=2.0&key=5136fc1fd31d3a4999d83e893e334c18"></script>
+  <style>
+    /* 给地图容器设置宽高 */
+    #container {
+      width: 100%;
+      height: 600px;
+    }
+  </style>
+</head>
+<body>
+  <!-- 地图容器 -->
+  <div id="container"></div>
+
+  <script>
+    // 初始化地图
+    var map = new AMap.Map('container', {
+      zoom: 12, // 地图缩放级别
+      center: [106.55, 29.56] // 重庆市中心坐标（经纬度）
+    });
+
+    // 添加一个标记点（比如重庆解放碑）
+    var marker = new AMap.Marker({
+      position: [106.5871, 29.5431], // 解放碑坐标
+      title: '解放碑'
+    });
+    map.add(marker);
+
+    // 添加信息窗口
+    var infoWindow = new AMap.InfoWindow({
+      content: '<div style="padding:10px;">解放碑美食区</div>'
+    });
+    marker.on('click', function() {
+      infoWindow.open(map, marker.getPosition());
+    });
+  </script>
+</body>
+</html>
+
+                                        
