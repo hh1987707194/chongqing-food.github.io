@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>美食评论</title>
+    <style>
+        .star { color:#ccc; font-size:24px; cursor:pointer; }
+        .star.active { color:#ff9800; }
+        .comment { padding:10px; border-bottom:1px solid #eee; }
+    </style>
+</head>
+<body>
+
+<h2>重庆美食 - 大足羊肉汤</h2>
+
+<!-- 发表评论 -->
+<div>
+    <textarea id="content" rows="4" style="width:100%" placeholder="写评论…"></textarea>
+    <div>
+        <span class="star" data-s="1">★</span>
+        <span class="star" data-s="2">★</span>
+        <span class="star" data-s="3">★</span>
+        <span class="star" data-s="4">★</span>
+        <span class="star" data-s="5">★</span>
+    </div>
+    <button onclick="submitComment()">提交评论</button>
+</div>
+
+<!-- 评论列表 -->
+<div id="list" style="margin-top:20px;"></div>
+
+<script>
+    let score = 0;
+    const food_id = "1";
+
+    // 星级
+    document.querySelectorAll('.star').forEach(s => {
+        s.onclick = () => {
+            score = s.dataset.s;
+            document.querySelectorAll('.star').forEach((n, i) => {
+                n.classList.toggle('active', i < score);
+            });
+        }
+    });
+
+    // 加载评论
+    function loadComments() {
+        fetch("http://127.0.0.1:5000/get_comments?food_id=" + food_id)
+            .then(r => r.json())
+            .then(data => {
+                let html = "";
+                data.forEach(c => {
+                    html += `<div class='comment'>
+                        <div>${c.content}</div>
+                        <div>评分：${c.score}分</div>
+                        <div>${c.time}</div>
+                    </div>`;
+                });
+                document.getElementById("list").innerHTML = html;
+            });
+    }
+
+    // 提交评论
+    function submitComment() {
+        let content = document.getElementById("content").value;
+        if (!content || score == 0) {
+            alert("写评论+打分");
+            return;
+        }
+
+        fetch("http://127.0.0.1:5000/add_comment", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ food_id, content, score })
+        }).then(() => {
+            document.getElementById("content").value = "";
+            score = 0;
+            document.querySelectorAll('.star').forEach(n => n.classList.remove('active'));
+            loadComments();
+        });
+    }
+
+    // 页面打开就加载
+    loadComments();
+</script>
+
+</body>
+</html>
