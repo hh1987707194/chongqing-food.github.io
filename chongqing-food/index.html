@@ -871,7 +871,7 @@
 
      // 加载评论
      function loadComments() {
-         fetch("http://127.0.0.1:5000/get_comments?food_id=" + food_id)
+         fetch("https://hhhhhaohao.pythonanywhere.com/get_comments?food_id=" + food_id)
              .then(res => res.json())
              .then(data => {
                  let html = "";
@@ -899,7 +899,7 @@
              return;
          }
 
-         fetch("http://127.0.0.1:5000/add_comment", {
+         fetch("https://hhhhhaohao.pythonanywhere.com/add_comment", {
              method: "POST",
              headers: { "Content-Type": "application/json" },
              body: JSON.stringify({ food_id, content, score })
