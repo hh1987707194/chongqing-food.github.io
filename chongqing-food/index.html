@@ -561,6 +561,88 @@
         }
     </style>
 </head>
+
+<script>
+    // ==========================
+    // 寻味山城 - 搜索功能完整版
+    // ==========================
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchInput = document.getElementById('searchInput');
+        const heroSearchInput = document.getElementById('heroSearchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const heroSearchBtn = document.getElementById('heroSearchBtn');
+        const searchResults = document.getElementById('searchResults');
+        const foodGridSearch = document.getElementById('foodGridSearch');
+        const resultCount = document.getElementById('resultCount');
+
+        // 绑定搜索事件
+        if (searchBtn) searchBtn.addEventListener('click', doSearch);
+        if (heroSearchBtn) heroSearchBtn.addEventListener('click', doSearch);
+        if (searchInput) searchInput.addEventListener('keyup', function (e) {
+            if (e.key === 'Enter') doSearch();
+        });
+        if (heroSearchInput) heroSearchInput.addEventListener('keyup', function (e) {
+            if (e.key === 'Enter') doSearch();
+        });
+
+        function doSearch() {
+            let keyword = (searchInput?.value || heroSearchInput?.value || '').trim().toLowerCase();
+            if (!keyword) return;
+
+            // 同步两个搜索框
+            if (searchInput) searchInput.value = keyword;
+            if (heroSearchInput) heroSearchInput.value = keyword;
+
+            // 开始匹配数据
+            let results = foodData.filter(item => {
+                return item.name.toLowerCase().includes(keyword)
+                    || item.district.toLowerCase().includes(keyword)
+                    || item.tags.some(t => t.toLowerCase().includes(keyword));
+            });
+
+            // 显示结果
+            showSearchResults(results);
+        }
+
+        function showSearchResults(results) {
+            foodGridSearch.innerHTML = '';
+            searchResults.style.display = 'block';
+            resultCount.textContent = `找到 ${results.length} 条结果`;
+
+            if (results.length === 0) {
+                foodGridSearch.innerHTML = `
+                 <div class="no-results">
+                     <i class="fas fa-search"></i>
+                     <p>没有找到相关美食，请换个关键词试试~</p>
+                 </div>
+             `;
+                return;
+            }
+
+            results.forEach(item => {
+                let card = document.createElement('div');
+                card.className = 'card food-card';
+                card.onclick = () => window.location.href = `detail.html?id=${item.id}`; // 可跳详情页
+
+                card.innerHTML = `
+                 <div class="card-image">
+                     <img src="${item.image || 'images/default-food.jpg'}" alt="${item.name}">
+                 </div>
+                 <div class="card-content">
+                     <h3>${item.name}</h3>
+                     <p class="description">${item.description}</p>
+                     <div class="tags">
+                         <span class="tag">${item.district}</span>
+                         ${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+                     </div>
+                 </div>
+             `;
+                foodGridSearch.appendChild(card);
+            });
+        }
+    });
+</script>
+    
 <body>
     <!-- 头部 -->
     <header>
@@ -802,6 +884,144 @@
         </div>
     </main>
 
+ <!-- 重庆区县美食分类模块 - 直接插入到你原网页 </body> 之前 -->
+ <style>
+     /* 整体容器 */
+     .cq-food-category {
+         max-width: 1200px;
+         margin: 60px auto;
+         padding: 0 20px;
+         font-family: "Microsoft YaHei", sans-serif;
+         background-color: #fff8f6;
+     }
+
+     /* 分类标题样式 */
+     .category-title {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         gap: 10px;
+         font-size: 32px;
+         color: #e63946;
+         margin: 50px 0 30px;
+         position: relative;
+     }
+
+         .category-title::after {
+             content: '';
+             position: absolute;
+             bottom: -10px;
+             width: 60px;
+             height: 3px;
+             background: #e63946;
+             border-radius: 3px;
+         }
+
+     /* 网格布局 */
+     .food-grid {
+         display: grid;
+         grid-template-columns: repeat(3, 1fr);
+         gap: 20px;
+     }
+
+     @media (max-width: 768px) {
+         .food-grid {
+             grid-template-columns: repeat(2, 1fr);
+         }
+     }
+
+     @media (max-width: 480px) {
+         .food-grid {
+             grid-template-columns: 1fr;
+         }
+     }
+
+     /* 美食项卡片 */
+     .food-item {
+         background: #ffffff;
+         padding: 20px 25px;
+         border-radius: 12px;
+         box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+         font-size: 22px;
+         font-weight: 500;
+         color: #222;
+         transition: 0.2s;
+     }
+
+         .food-item:hover {
+             transform: translateY(-3px);
+             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+         }
+ </style>
+
+ <div class="cq-food-category">
+     <!-- 1. 麻辣重口专属 -->
+     <div class="category-title">
+         🌶️ 麻辣重口专属
+     </div>
+     <div class="food-grid">
+         <div class="food-item">重庆老火锅</div>
+         <div class="food-item">歌乐山辣子鸡</div>
+         <div class="food-item">南山泉水鸡</div>
+         <div class="food-item">铁山坪花椒鸡</div>
+         <div class="food-item">毛血旺</div>
+         <div class="food-item">丰都麻辣鸡</div>
+         <div class="food-item">黔江鸡杂</div>
+         <div class="food-item">铜梁泡椒鸡</div>
+     </div>
+
+     <!-- 2. 河鲜鱼类专区 -->
+     <div class="category-title">
+         🐟 河鲜鱼类专区
+     </div>
+     <div class="food-grid">
+         <div class="food-item">江津酸菜鱼</div>
+         <div class="food-item">璧山来凤鱼</div>
+         <div class="food-item">潼南太安鱼</div>
+         <div class="food-item">万州烤鱼</div>
+     </div>
+
+     <!-- 3. 鲜汤滋补美食 -->
+     <div class="category-title">
+         🍲 鲜汤滋补美食
+     </div>
+     <div class="food-grid">
+         <div class="food-item">大足羊肉汤</div>
+         <div class="food-item">武隆碗碗羊肉</div>
+         <div class="food-item">秀山土鸡</div>
+         <div class="food-item">石柱莼菜</div>
+     </div>
+
+     <!-- 4. 特色小吃点心 -->
+     <div class="category-title">
+         🍜 特色小吃点心
+     </div>
+     <div class="food-grid">
+         <div class="food-item">合川肉片</div>
+         <div class="food-item">荣昌卤鹅</div>
+         <div class="food-item">梁平张鸭子</div>
+         <div class="food-item">云阳包面</div>
+         <div class="food-item">巫山翡翠凉粉</div>
+         <div class="food-item">彭水都卷子</div>
+         <div class="food-item">武隆羊角豆腐干</div>
+         <div class="food-item">酉阳龚滩豆腐</div>
+     </div>
+
+     <!-- 5. 名优特产干货 -->
+     <div class="category-title">
+         🎁 名优特产干货
+     </div>
+     <div class="food-grid">
+         <div class="food-item">永川秀芽</div>
+         <div class="food-item">奉节脐橙</div>
+         <div class="food-item">忠州豆腐乳</div>
+         <div class="food-item">涪陵榨菜</div>
+         <div class="food-item">开州香辣豆瓣</div>
+         <div class="food-item">南川金佛山笋</div>
+         <div class="food-item">长寿沙田柚</div>
+     </div>
+ </div>
+    
     <!-- 底部 -->
     <footer>
         <div class="container">
