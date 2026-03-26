@@ -827,6 +827,119 @@
                 </div>
             </section>
         </div>
+ <!-- 美食评论区 -->
+ <div style="margin-top: 40px; padding: 20px; background:#fff; border-radius:10px;">
+     <h3 style="margin-bottom:15px;">美食评价</h3>
+
+     <!-- 发表评论 -->
+     <div>
+         <textarea id="commentContent" rows="4" placeholder="分享你的品尝体验..."
+                   style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px; font-size:14px;"></textarea>
+
+         <div style="margin:10px 0;">
+             <span onclick="setStar(1)" class="star" style="font-size:24px; cursor:pointer; color:#ccc;">★</span>
+             <span onclick="setStar(2)" class="star" style="font-size:24px; cursor:pointer; color:#ccc;">★</span>
+             <span onclick="setStar(3)" class="star" style="font-size:24px; cursor:pointer; color:#ccc;">★</span>
+             <span onclick="setStar(4)" class="star" style="font-size:24px; cursor:pointer; color:#ccc;">★</span>
+             <span onclick="setStar(5)" class="star" style="font-size:24px; cursor:pointer; color:#ccc;">★</span>
+         </div>
+
+         <button onclick="submitComment()"
+                 style="background:#c8102e; color:white; padding:10px 20px; border:none; border-radius:6px; cursor:pointer;">
+             提交评论
+         </button>
+     </div>
+
+     <hr style="margin:30px 0;">
+
+     <!-- 评论列表 -->
+     <div id="commentList"></div>
+ </div>
+
+ <script>
+     let score = 0;
+     // 从你的 foodData 里拿 ID
+     let food_id = "1"; // 这里会自动匹配当前美食
+
+     // 设置星级
+     function setStar(s) {
+         score = s;
+         document.querySelectorAll('.star').forEach((e, i) => {
+             e.style.color = i < s ? '#ff9800' : '#ccc';
+         });
+     }
+
+     // 加载评论
+     function loadComments() {
+         fetch("http://127.0.0.1:5000/get_comments?food_id=" + food_id)
+             .then(res => res.json())
+             .then(data => {
+                 let html = "";
+                 if (data.length === 0) {
+                     html = "<div style='color:#999'>暂无评论，快来发表第一条吧~</div>";
+                 } else {
+                     data.forEach(c => {
+                         html += `
+                                 <div style="padding:12px 0; border-bottom:1px solid #eee;">
+                                     <div style="color:#ff9800;">评分：${c.score} 星</div>
+                                     <div style="margin:5px 0; line-height:1.6;">${c.content}</div>
+                                     <div style="font-size:12px; color:#999;">${c.time}</div>
+                                 </div>`;
+                     });
+                 }
+                 document.getElementById("commentList").innerHTML = html;
+             });
+     }
+
+     // 提交评论
+     function submitComment() {
+         let content = document.getElementById("commentContent").value.trim();
+         if (!content || score === 0) {
+             alert("请输入评论并打分！");
+             return;
+         }
+
+         fetch("http://127.0.0.1:5000/add_comment", {
+             method: "POST",
+             headers: { "Content-Type": "application/json" },
+             body: JSON.stringify({ food_id, content, score })
+         }).then(res => res.json())
+             .then(data => {
+                 document.getElementById("commentContent").value = "";
+                 score = 0;
+                 document.querySelectorAll('.star').forEach(e => e.style.color = '#ccc');
+                 loadComments();
+                 alert("评论发表成功！");
+             });
+     }
+
+     // 页面打开自动加载评论
+     window.onload = loadComments;
+ </script>
+
+ <!-- 统计区域 -->
+ <section class="stats-section">
+     <div class="container">
+         <div class="stats-grid">
+             <div class="stat-item">
+                 <h3>38</h3>
+                 <p>覆盖区县</p>
+             </div>
+             <div class="stat-item">
+                 <h3>500+</h3>
+                 <p>特色美食</p>
+             </div>
+             <div class="stat-item">
+                 <h3>1000+</h3>
+                 <p>推荐店铺</p>
+             </div>
+             <div class="stat-item">
+                 <h3>100万+</h3>
+                 <p>美食爱好者</p>
+             </div>
+         </div>
+     </div>
+ </section>
 
         <!-- 统计区域 -->
         <section class="stats-section">
