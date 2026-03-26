@@ -642,6 +642,47 @@
         }
     });
 </script>
+
+<script>
+    // 强制解锁搜索框输入 + 删除
+    document.addEventListener('DOMContentLoaded', function () {
+        let inputs = [
+            document.getElementById('searchInput'),
+            document.getElementById('heroSearchInput')
+        ];
+
+        inputs.forEach(el => {
+            if (!el) return;
+
+            // 强制允许输入、删除、编辑
+            el.removeAttribute('disabled');
+            el.removeAttribute('readonly');
+            el.style.pointerEvents = 'auto';
+
+            // 强制放行所有键盘按键
+            el.onkeydown = function (e) {
+                e.stopPropagation();
+            };
+            el.onkeyup = function (e) {
+                e.stopPropagation();
+            };
+            el.onkeypress = function (e) {
+                e.stopPropagation();
+            };
+        });
+
+        // 最简单搜索，不依赖任何复杂逻辑
+        let btn = document.getElementById('heroSearchBtn');
+        let input = document.getElementById('heroSearchInput');
+
+        if (btn && input) {
+            btn.onclick = function () {
+                console.log('搜索:', input.value);
+                
+            };
+        }
+    });
+</script>
     
 <body>
     <!-- 头部 -->
